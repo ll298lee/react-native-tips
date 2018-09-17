@@ -401,20 +401,20 @@ export default class Tips extends PureComponent {
                   style={[styles.tooltipContainer, {
                     top: tooltipTop,
                     left: tooltipLeft
-                  }, tooltipContainerStyle]}
+                  }, tooltipContainerStyle, {overflow:'visible'}]}
                 >
                   <Tooltip
                     style={style}
                   >
                     {content}
                     {!!text && <Text style={[styles.text, textStyle]}>{text}</Text>}
-                    {position !== 'none' && (
-                      <TooltipArrow
-                        style={[getArrowStyleByPosition(position), tooltipArrowStyle]}
-                      />
-                    )}
                   </Tooltip>
                 </View>
+                {position !== 'none' && (
+                  <TooltipArrow
+                    style={[getArrowStyleByPosition(position), tooltipArrowStyle]}
+                  />
+                )}
               </ModalContent>
 
             </View>
