@@ -380,11 +380,15 @@ export default class Tips extends PureComponent {
                   contentStyle
                 ]}
               >
+                {position !== 'none' && (
+                  <TooltipArrow
+                    style={[getArrowStyleByPosition(position), tooltipArrowStyle]}
+                  />
+                )}
                 <ChildrenOverlay
                   onPress={this.handleRequestClose}
                   style={styles.childrenOverlay}
                 />
-
                 <HighlightView
                   style={[{
                     width,
@@ -395,7 +399,6 @@ export default class Tips extends PureComponent {
                 >
                   {children}
                 </HighlightView>
-
                 <View
                   onLayout={this.handleTooltipLayout}
                   style={[styles.tooltipContainer, {
@@ -410,11 +413,6 @@ export default class Tips extends PureComponent {
                     {!!text && <Text style={[styles.text, textStyle]}>{text}</Text>}
                   </Tooltip>
                 </View>
-                {position !== 'none' && (
-                  <TooltipArrow
-                    style={[getArrowStyleByPosition(position), tooltipArrowStyle]}
-                  />
-                )}
               </ModalContent>
 
             </View>
