@@ -61,7 +61,65 @@ const getArrowStyleByPosition = (position = 'top') => {
   }
 }
 
+const getArrowBorderStyleByPosition = (position = 'top') => {
+  switch (position) {
+    case 'right': return {
+      left: -5,
+      top: '50%',
+      marginTop: 5,
+      borderTopWidth: 5,
+      borderRightWidth: 5,
+      borderBottomWidth: 5,
+      borderTopColor: 'transparent',
+      borderBottomColor: 'transparent',
+      borderRightColor: 'rgba(0, 0, 0, 0.5)'
+    }
+
+    case 'left': return {
+      right: -5,
+      top: '50%',
+      marginTop: 5,
+      borderTopWidth: 5,
+      borderLeftWidth: 5,
+      borderBottomWidth: 5,
+      borderTopColor: 'transparent',
+      borderBottomColor: 'transparent',
+      borderLeftColor: 'rgba(0, 0, 0, 0.5)'
+    }
+
+    case 'bottom': return {
+      top: -5,
+      left: '50%',
+      marginLeft: 2.5,
+      borderLeftWidth: 5,
+      borderRightWidth: 5,
+      borderBottomWidth: 5,
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
+      borderBottomColor: 'rgba(0, 0, 0, 0.5)'
+    }
+
+    default: return {
+      bottom: -5,
+      left: '50%',
+      marginLeft: 2.5,
+      borderTopWidth: 5,
+      borderLeftWidth: 5,
+      borderRightWidth: 5,
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
+      borderTopColor: 'rgba(0, 0, 0, 0.5)'
+    }
+  }
+}
+
 const TooltipArrow = styled.View`
+  position: absolute;
+  shadow-radius: 1px;
+  shadow-color: black;
+  shadow-opacity: 0.5;
+`
+const TooltipArrowBorder = styled.View`
   position: absolute;
   shadow-radius: 1px;
   shadow-color: black;
@@ -337,7 +395,7 @@ export default class Tips extends PureComponent {
    */
   render() {
     const {
-      children, position, text, childrenStyle, tooltipArrowStyle,
+      children, position, text, childrenStyle, tooltipArrowStyle, tooltipArrowBoderStyle,
       modalStyle, textStyle, style, contentStyle, enableChildrenInteraction,
       tooltipContainerStyle, content, offsetLeft, offsetTop
     } = this.props
@@ -380,6 +438,11 @@ export default class Tips extends PureComponent {
                   contentStyle
                 ]}
               >
+                {position !== 'none' && (
+                  <TooltipArrowBorder
+                    style={[getArrowBorderStyleByPosition(position), tooltipArrowBoderStyle]}
+                  />
+                )}
                 {position !== 'none' && (
                   <TooltipArrow
                     style={[getArrowStyleByPosition(position), tooltipArrowStyle]}
@@ -432,6 +495,7 @@ Tips.defaultProps = {
   contentStyle: {},
   childrenStyle: {},
   tooltipArrowStyle: {},
+  tooltipArrowBoderStyle: {},
   tooltipContainerStyle: {},
   children: [],
   content: [],
@@ -471,6 +535,7 @@ Tips.propTypes = {
    * @type {Stylesheet}
    */
   tooltipArrowStyle: ViewPropTypes.style,
+  tooltipArrowBoderStyle: ViewPropTypes.style,
 
   /**
    * Override the style of the Modal Component (react-native)
