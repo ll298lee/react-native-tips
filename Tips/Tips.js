@@ -254,7 +254,7 @@ export default class Tips extends PureComponent {
    * @componentWillReceiveProps
    * @param {*} nextProps - Next properties of the PureComponent
    */
-  componentWillReceiveProps(nextProps, nextState) {
+  UNSAFE_componentWillReceiveProps(nextProps, nextState) {
     if (nextProps.visible && !this.props.visible && !nextState.ready) {
       this.updateComponentPosition(true)
     } else if (!nextProps.visible && this.props.visible && nextState.ready) {
